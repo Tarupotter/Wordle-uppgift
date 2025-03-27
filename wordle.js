@@ -1,31 +1,49 @@
-export default function findLetters(guess, answer) {
+/* Jag har  valt att börja om helt från början för att det jag gjorde först var inte heltäckande. 
+    jag vill loopa igenom gissningen för att jämföra den med svarsordet, men först måste jag separera alla bokstäver så jag 
+    kan jämföra indexplats mot indexplats och säger att orden alltid ska vara i uppercase.
     
-    const guessedWord = guess.toUpperCase().split(''); 
-    const answerWord = answer.toUpperCase().split(''); 
+Exempel på hur det ska se ut:
 
-    const result = [];
-
-    
-    guessedWord.forEach((letter, index) => {
-        if (letter === answerWord[index]) {
-            result.push({ letter, result: 'correct' });
-        } else {
-            result.push({ letter, result: 'incorrect' });
-        }
-    });
-
-    guessedWord.forEach((letter, index) => {
-        if (result[index].result === 'incorrect') {
-           
-            const letterInAnswer = answerWord.filter(l => l === letter).length;
-            const letterInResult = result.filter(r => r.letter === letter && r.result === 'correct').length;
-
-            if (letterInAnswer > letterInResult) {
-                result[index].result = 'misplaced';
-            }
-        }
-    });
+ C - H  = INCORRECT
+ Y - A  = MISPLACED
+ K - L  = INCORRECT
+ L - L  = CORRECT
+ A - Å  = INCORRECT
+ 
+ OM BOKSTAVEN ÄR RÄTT SKA DEN FÅ CORRECT
+ OM BOKSTAVEN INTE STÄMMER SKA DEN FÅ INCORRECT
+ OM DEN ÄR FELPLACERAD SKA DEN FÅ MISPLACED
+*/
 
 
- return result;
+ export default function feedback(guess, answer) {
+  const guessedWord = guess.toUpperCase().split("");
+  const correctWord = answer.toUpperCase().split("");
+  
+  
+  const result = [];
+  
+ 
+  guessedWord.forEach((letter, i) => {
+    if (letter === correctWord[i]) {
+      result.push({ letter: letter, result: "correct" });
+      correctWord[i] = null; 
+    } else {
+      result.push({ letter: letter, result: "incorrect" });
+    }
+  });
+
+  
+  result.forEach((item, i) => {
+    if (item.result === "incorrect") {
+      
+      if (correctWord.includes(guessedWord[i])) {
+       
+        item.result = "misplaced";
+        correctWord[correctWord.indexOf(guessedWord[i])] = null; 
+      }
+    }
+  });
+  
+  return result;
 }
