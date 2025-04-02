@@ -44,6 +44,6 @@ Exempel på hur det ska se ut:
       }
     }
   });
-  
+
   return result;
 }
