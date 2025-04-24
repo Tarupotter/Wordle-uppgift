@@ -7,6 +7,7 @@ export default function Settings({ length, setLength, allowRepeats, setAllowRepe
         <label>
           Antal bokstäver:
           <select
+          className="settings-number-option"
             value={length}
             onChange={(e) => setLength(Number(e.target.value))} 
           >
@@ -23,6 +24,7 @@ export default function Settings({ length, setLength, allowRepeats, setAllowRepe
         <label>
           Tillåt upprepade bokstäver:
           <input
+          className="settings-checkbox"
             type="checkbox"
             checked={allowRepeats}
             onChange={() => setAllowRepeats(!allowRepeats)} // Växla mellan tillåtet eller inte

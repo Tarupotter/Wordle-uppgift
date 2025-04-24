@@ -35,6 +35,22 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 30px;
+  background-color: transparent;
+  border-radius: 0.4rem;
+  box-shadow: 0 8px 20px rgba(0.5, 0.5, 0.5, 0.2); 
+}
+
+.settings-container h2 {
+  margin: 0 0 3rem 0;
+}
+
+.settings-number-option {
+  background-color: transparent;
+}
+
+.settings-checkbox {
+  accent-color: black;
 }
 
 .settings-button {

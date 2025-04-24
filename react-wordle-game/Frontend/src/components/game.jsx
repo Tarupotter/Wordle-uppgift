@@ -17,7 +17,7 @@ export default function Game() {
     'start', 'glass', 'smile', 'hello', 'sweep',
     'trees', 'smart', 'grape', 'pride', 'trace',
     'plane', 'globe', 'light', 'candy', 'brush',
-    'chair', 'blame', 'track', 'grind', 'flame'
+    'chair', 'blame', 'track', 'grind', 'flame', 'monster'
   ];
 
   const getFilteredWords = () => {
