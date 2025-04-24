@@ -18,10 +18,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   color: black;
   width: 25rem;
-  height: 30rem;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .game-board h1 {
@@ -37,16 +38,17 @@ body {
 }
 
 .settings-button {
-  border: 1px solid black;
+  border: 1px solid rgb(222, 204, 137);
   background-color: transparent;
   color: rgb(0, 0, 0);
   width: 7rem;
   border-radius: 0.9rem;
-  padding: 0.2rem;
+  padding: 0.5rem;
   font-size: 1.2rem;
   margin-top: 1rem;
   cursor: pointer;
   transition: all 0.1s ease;
+  box-shadow: 0 4px 10px rgba(0.2, 0.2, 0.2, 0.2);
 }
 
 .settings-button:hover {

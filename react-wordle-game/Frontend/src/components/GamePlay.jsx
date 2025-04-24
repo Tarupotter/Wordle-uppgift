@@ -1,6 +1,7 @@
 import Feedback from './Feedback';
 
 export default function GamePlay({ secretWord, guess, setGuess, feedback, setFeedback, history, setHistory, resetGame }) {
+
   const getFeedback = (guess, answer) => {
     return [...guess.toUpperCase()].map((letter, i) => ({
       letter,
@@ -16,7 +17,6 @@ export default function GamePlay({ secretWord, guess, setGuess, feedback, setFee
     }
 
     const result = getFeedback(guess, secretWord);
-    console.log(result);  // Logga feedbacken här för att se om det ser rätt ut
     setFeedback(result);
     setHistory([...history, { guess, feedback: result }]);
     setGuess('');
