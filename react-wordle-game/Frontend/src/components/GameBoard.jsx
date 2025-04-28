@@ -1,0 +1,131 @@
+import React, { useState, useEffect } from "react";
+
+function GameBoard() {
+  const [gameStarted, setGameStarted] = useState(false);
+  const [guess, setGuess] = useState("");
+  const [guesses, setGuesses] = useState([]);
+  const [word, setWord] = useState("");
+  const [length, setLength] = useState(5); 
+  const [allowRepeats, setAllowRepeats] = useState(true); 
+
+  // Funktion för att starta spelet
+  const startGame = () => {
+    setGameStarted(true);
+  };
+
+ // Hämtar ett slumpmässigt ord när spelet startar eller längden på ordet ändras
+  useEffect(() => {
+    if (gameStarted) {
+      
+      const wordList = ["apple", "banana", "grape", "peach", "melon", "plum"];
+      const filteredWords = wordList.filter((w) => w.length === length); 
+      const randomWord =
+        filteredWords[Math.floor(Math.random() * filteredWords.length)];
+      setWord(randomWord);
+    }
+  }, [gameStarted, length]); 
+
+ 
+  const handleGuess = () => {
+    if (guess.trim().length === length) {
+      setGuesses([...guesses, guess]);
+      setGuess("");
+    } else {
+        
+        alert(`Gissningen måste vara ${length} bokstäver lång!`);
+      }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") handleGuess();
+  };
+
+  // Feedback-funktion: kollar om bokstaven är rätt, fel eller på fel plats
+  const getFeedback = (letter, index) => {
+    if (letter === word[index]) {
+      return "correct"; 
+    } else if (word.includes(letter)) {
+      return "misplaced"; 
+    } else {
+      return "incorrect";
+    }
+  };
+
+  return (
+    <div className="game-board">
+      <h1 className="game-title">WORDLE</h1>
+
+      {!gameStarted ? (
+        <div className="settings">
+          <h2 className="settings-title">Välj inställningar</h2>
+
+          <div className="settings-item">
+            <label className="settings-label">
+              Ordets längd:
+              <select
+                className="settings-select"
+                value={length}
+                onChange={(e) => setLength(Number(e.target.value))}
+              >
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+                <option value={6}>6</option>
+                <option value={7}>7</option>
+              </select>
+            </label>
+          </div>
+
+          <div className="settings-item">
+            <label className="settings-label">
+              Tillåt upprepade bokstäver:
+              <input
+                className="settings-checkbox"
+                type="checkbox"
+                checked={allowRepeats}
+                onChange={(e) => setAllowRepeats(e.target.checked)}
+              />
+            </label>
+          </div>
+
+          <button className="start-button" onClick={startGame}>
+            Starta spelet
+          </button>
+        </div>
+      ) : (
+        <div className="game-play">
+          <div className="guess-input">
+            <input
+              className="guess-input-field"
+              type="text"
+              value={guess}
+              onChange={(e) => setGuess(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Skriv din gissning här"
+              maxLength={length} 
+            />
+            <button className="guess-button" onClick={handleGuess}>
+              Gissa
+            </button>
+          </div>
+
+          <ul className="guess-list">
+            {guesses.map((guess, index) => (
+              <li key={index} className="guess-item">
+                {guess.split("").map((letter, letterIndex) => (
+                  <span
+                    key={letterIndex}
+                    className={`letter ${getFeedback(letter, letterIndex)}`}
+                  >
+                    {letter}
+                  </span>
+                ))}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default GameBoard;

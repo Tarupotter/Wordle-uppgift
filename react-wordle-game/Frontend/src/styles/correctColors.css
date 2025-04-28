@@ -1,0 +1,26 @@
+.letter {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  .correct {
+    background-color: rgb(0, 255, 0);
+    color: white;
+  }
+  
+  .misplaced {
+    background-color: rgb(255, 255, 0);
+    color: black;
+  }
+  
+  .incorrect {
+    background-color: rgb(255, 0, 0);
+    color: white;
+  }

@@ -1,12 +1,11 @@
-import Game from "./components/game";
+import GameBoard from "./components/GameBoard";
 
 
 function App() {
+
+
   return (
-    <div className="game-board">
-      <h1>WORDLE</h1>
-      <Game />
-    </div>
+ <GameBoard/>
   );
 }
 
