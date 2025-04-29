@@ -17,7 +17,7 @@ function GameBoard() {
   useEffect(() => {
     if (gameStarted) {
       
-      const wordList = ["apple", "banana", "grape", "peach", "melon", "plum"];
+      const wordList = ["dagbok", "dator", "hörlurar", "monster", "kaka", "lampa"];
       const filteredWords = wordList.filter((w) => w.length === length); 
       const randomWord =
         filteredWords[Math.floor(Math.random() * filteredWords.length)];
@@ -39,6 +39,14 @@ function GameBoard() {
   const handleKeyDown = (e) => {
     if (e.key === "Enter") handleGuess();
   };
+
+ 
+const resetGame = () => {
+  setGameStarted(false);
+  setGuess("");
+  setGuesses([]);
+  setWord("");
+};
 
   // Feedback-funktion: kollar om bokstaven är rätt, fel eller på fel plats
   const getFeedback = (letter, index) => {
@@ -103,10 +111,13 @@ function GameBoard() {
               placeholder="Skriv din gissning här"
               maxLength={length} 
             />
-            <button className="guess-button" onClick={handleGuess}>
+          </div>
+  <button className="guess-button" onClick={handleGuess}>
               Gissa
             </button>
-          </div>
+          <button className="reset-button" onClick={resetGame}>
+   Omstart
+  </button>
 
           <ul className="guess-list">
             {guesses.map((guess, index) => (
