@@ -8,24 +8,36 @@ function GameBoard() {
   const [length, setLength] = useState(5); 
   const [allowRepeats, setAllowRepeats] = useState(true); 
 
-  // Funktion för att starta spelet
-  const startGame = () => {
-    setGameStarted(true);
-  };
 
  // Hämtar ett slumpmässigt ord när spelet startar eller längden på ordet ändras
-  useEffect(() => {
-    if (gameStarted) {
-      
-      const wordList = ["dagbok", "dator", "hörlurar", "monster", "kaka", "lampa"];
-      const filteredWords = wordList.filter((w) => w.length === length); 
-      const randomWord =
-        filteredWords[Math.floor(Math.random() * filteredWords.length)];
-      setWord(randomWord);
-    }
-  }, [gameStarted, length]); 
+ const getWords = async () => {
+  try {
+    const response = await fetch('/api/words', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ length }) // skicka med vald ordlängd
+    });
 
- 
+    const payload = await response.json();
+
+    if (payload && payload.word) {
+      setWord(payload.word);
+    } else {
+      setWord("default");
+    }
+  } catch (error) {
+    setWord("default");
+  }
+};
+
+const startGame = async () => {
+  await getWords(); // hämta ord med rätt längd innan spelet startar
+  setGameStarted(true);
+};
+
+
   const handleGuess = () => {
     if (guess.trim().length === length) {
       setGuesses([...guesses, guess]);
