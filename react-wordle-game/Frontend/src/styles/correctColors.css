@@ -5,22 +5,29 @@
     margin: 5px;
     text-align: center;
     line-height: 40px;
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
     border-radius: 5px;
+    text-transform: uppercase;
   }
   
   .correct {
-    background-color: rgb(0, 255, 0);
-    color: white;
+    background-color: rgb(100, 202, 100);
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgb(255, 255, 255);
   }
   
   .misplaced {
-    background-color: rgb(255, 255, 0);
-    color: black;
+    background-color: rgb(213, 213, 77);
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgb(255, 255, 255);
   }
   
   .incorrect {
-    background-color: rgb(255, 0, 0);
-    color: white;
+    background-color: rgb(217, 94, 94);
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgb(255, 255, 255);
   }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import feedback from "./Feedback";
 
 function GameBoard() {
   const [gameStarted, setGameStarted] = useState(false);
@@ -38,15 +39,15 @@ const startGame = async () => {
 };
 
 
-  const handleGuess = () => {
-    if (guess.trim().length === length) {
-      setGuesses([...guesses, guess]);
-      setGuess("");
-    } else {
-        
-        alert(`Gissningen måste vara ${length} bokstäver lång!`);
-      }
-  };
+const handleGuess = () => {
+  if (guess.trim().length === length) {
+    const guessFeedback = feedback(guess, word);  // Använd feedback här
+    setGuesses([...guesses, { guess, feedback: guessFeedback }]);
+    setGuess("");  // Återställ gissningen
+  } else {
+    alert(`Gissningen måste vara ${length} bokstäver lång!`);
+  }
+};
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") handleGuess();
@@ -60,16 +61,17 @@ const resetGame = () => {
   setWord("");
 };
 
-  // Feedback-funktion: kollar om bokstaven är rätt, fel eller på fel plats
-  const getFeedback = (letter, index) => {
-    if (letter === word[index]) {
-      return "correct"; 
-    } else if (word.includes(letter)) {
-      return "misplaced"; 
-    } else {
-      return "incorrect";
-    }
-  };
+useEffect(() => {
+  if (guesses.length > 0 && guesses[guesses.length - 1] === word) {
+    alert("Grattis! Du gissade rätt!");
+    setGameStarted(false);
+  } else if (guesses.length >= 8) {
+    alert(`Tyvärr! Ordet var "${word}". Försök igen!`);
+    setGameStarted(false);
+  }
+}, [guesses]);
+
+ 
 
   return (
     <div className="game-board">
@@ -131,20 +133,20 @@ const resetGame = () => {
    Omstart
   </button>
 
-          <ul className="guess-list">
-            {guesses.map((guess, index) => (
-              <li key={index} className="guess-item">
-                {guess.split("").map((letter, letterIndex) => (
-                  <span
-                    key={letterIndex}
-                    className={`letter ${getFeedback(letter, letterIndex)}`}
-                  >
-                    {letter}
-                  </span>
-                ))}
-              </li>
-            ))}
-          </ul>
+  <ul className="guess-list">
+  {guesses.map((item, index) => (
+    <li key={index} className="guess-item">
+      {item.guess.split("").map((letter, i) => (
+        <span
+          key={i}
+          className={`letter ${item.feedback[i].result}`} 
+        >
+          {letter}
+        </span>
+      ))}
+    </li>
+  ))}
+</ul>
         </div>
       )}
     </div>

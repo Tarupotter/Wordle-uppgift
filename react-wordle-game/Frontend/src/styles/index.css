@@ -1,8 +1,11 @@
 body {
-  background: linear-gradient(135deg, #676666, #000000);
+  background-image: url("/images/watercolor.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   min-height: 100vh;
   margin: 0;
-  font-family: 'Arial', sans-serif;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,32 +14,44 @@ body {
 .game-board {
   text-align: center;
   margin: 20px;
-  color: white;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid rgb(165, 151, 151);
-  background: linear-gradient(200deg, #4b4848, #000000); 
-  width: 90%; 
+  border: 1px solid rgb(182, 172, 172);
+  background: linear-gradient(135deg, #c8b39f, #f5e9dc);
+  width: 90%;
   max-width: 700px;
-  box-shadow:
-  0 25px 50px rgba(0, 0, 0, 0.85),
-  0 5px 10px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 12px rgba(109, 109, 109, 0.1), 0 8px 24px #74665a;
+
 }
 
 .game-title {
   font-size: 3rem;
   margin-bottom: 20px;
   margin-top: 0;
-  letter-spacing: 5px;
+  letter-spacing: 10px;
+  font-family: "Fascinate", system-ui;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 4px 3px rgba(30, 30, 30, 0.6);
 }
 
-.settings, .game-play {
+ .settings {
+  background: linear-gradient(135deg, #837363, #c9baaa);
+  border: 1px solid;
+ }
+
+.settings,
+.game-play {
   margin-top: 20px;
   padding: 10px;
   border-radius: 5px;
 }
 
-.settings-title, .settings-item, .guess-input, .guess-button {
+.settings-item,
+.guess-input,
+.guess-button {
   font-size: 1.2rem;
 }
 
@@ -47,45 +62,53 @@ body {
   border-radius: 5px;
 }
 
-.settings-select, .settings-title {
-margin-bottom: 10px;
-margin-top: 20px;
+.settings-select,
+.settings-title {
+  margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 .settings-checkbox {
-  accent-color: rgb(174, 4, 4);
+  accent-color: rgb(0, 0, 0);
 }
 
 .guess-input-field {
+  margin-bottom: 8px;
   margin-left: 10px;
   padding: 10px;
   font-size: 1rem;
   border-radius: 5px;
 }
 
-.start-button, .guess-button, .reset-button {
-  padding: 12px 24px;
+.start-button,
+.guess-button,
+.reset-button {
+  padding:  12px;
   margin-top: 30px;
-  font-size: 1.2rem; 
-  color: white; 
+  font-size: 1.5rem;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   border: none;
-  border-radius: 5px; 
+  border-radius: 10px;
   cursor: pointer;
-  background: linear-gradient(135deg, #333333, #222222); 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); 
+  background: linear-gradient(135deg, #c8b39faf, #f5e9dcc2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-.start-button:hover, .guess-button:hover, .reset-button:hover  {
-  background: linear-gradient(135deg, #444444, #333333); 
-   
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7); 
+.start-button:hover,
+.guess-button:hover,
+.reset-button:hover {
+  background: linear-gradient(135deg, #99897a, #f5e9dc39);
 }
 
-.start-button:active, .guess-button:active, .reset-button:active {
-transform: translateY(3px);
+.start-button:active,
+.guess-button:active,
+.reset-button:active {
+  transform: translateY(3px);
 }
 
-.guess-button, .reset-button {
+.guess-button,
+.reset-button {
   margin: 10px 0px 10px 10px;
 }
 
@@ -97,3 +120,5 @@ transform: translateY(3px);
 .guess-item {
   margin: 5px 0;
 }
+
+
