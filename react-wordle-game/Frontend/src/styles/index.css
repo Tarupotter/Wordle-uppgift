@@ -24,7 +24,6 @@ body {
   width: 90%;
   max-width: 700px;
   box-shadow: 0 4px 12px rgba(109, 109, 109, 0.1), 0 8px 24px #74665a;
-
 }
 
 .game-title {
@@ -121,4 +120,23 @@ body {
   margin: 5px 0;
 }
 
+.navbar {
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-family: "Fascinate", system-ui;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+ 
+}
+
+.navbar-item {
+ font-size: 30px;
+ padding: 0 20px 0 20px;
+}
 

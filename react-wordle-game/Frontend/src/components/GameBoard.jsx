@@ -41,9 +41,9 @@ const startGame = async () => {
 
 const handleGuess = () => {
   if (guess.trim().length === length) {
-    const guessFeedback = feedback(guess, word);  // Använd feedback här
+    const guessFeedback = feedback(guess, word);  
     setGuesses([...guesses, { guess, feedback: guessFeedback }]);
-    setGuess("");  // Återställ gissningen
+    setGuess("");  
   } else {
     alert(`Gissningen måste vara ${length} bokstäver lång!`);
   }
@@ -62,7 +62,10 @@ const resetGame = () => {
 };
 
 useEffect(() => {
-  if (guesses.length > 0 && guesses[guesses.length - 1] === word) {
+  if (
+    guesses.length > 0 &&
+    guesses[guesses.length - 1].guess.toUpperCase() === word.toUpperCase()
+  ) {
     alert("Grattis! Du gissade rätt!");
     setGameStarted(false);
   } else if (guesses.length >= 8) {
