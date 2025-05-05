@@ -1,29 +1,42 @@
 import express from 'express';
+import fs from 'fs/promises'; 
+import getFeedback from './feedback.js';
 
 const app = express();
 const port = 5080;
 
-// URL till ordlistan på GitHub
-const WORDS_URL = "https://raw.githubusercontent.com/dwyl/english-words/refs/heads/master/words_dictionary.json";
 
-app.use(express.json()); 
+app.use(express.json());
 
-app.post("/api/words", async (req, res) => {
-  try {
+app.post('/api/randomWord', async (req, res) => {
     const { length } = req.body;
 
-    const response = await fetch(WORDS_URL);
-    const data = await response.json();
+    const data = await fs.readFile('words.json', 'utf8');
+    const words = JSON.parse(data).words;
 
-    const wordList = Object.keys(data).filter(word => word.length === length);
+    const filteredWords = words.filter((w) => w.length === length);
+    
+    const randomWord = filteredWords[Math.floor(Math.random() * filteredWords.length)];
 
-    const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
     res.json({ word: randomWord });
-  } catch (error) {
-    console.error("Fel vid hämtning av ord:", error);
-    res.status(500).json({ error: "Serverfel vid hämtning av ord." });
-  }
 });
+
+
+app.post('/api/guess', (req, res) => {
+  const { guess, word } = req.body;
+
+  const feedback = getFeedback(guess, word);
+  const correct = guess.toLowerCase() === word.toLowerCase();
+
+  res.json({ feedback, correct });
+});
+
+
+app.get('/about', async (req, res) => {
+  const htmlText = await fs.readFile('./index.html');
+  res.send(htmlText.toString());
+});
+
 
 app.listen(port, () => {
   console.log(`Servern körs på http://localhost:${port}`);

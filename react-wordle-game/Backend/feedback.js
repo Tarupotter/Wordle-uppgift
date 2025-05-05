@@ -1,4 +1,4 @@
-export default function feedback(guess, answer) {
+export default function getFeedback(guess, answer) {
     const guessArr = guess.toUpperCase().split("");
     const answerArr = answer.toUpperCase().split("");
     const result = Array(guessArr.length);

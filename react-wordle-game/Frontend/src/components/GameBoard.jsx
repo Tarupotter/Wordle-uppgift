@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import feedback from "./Feedback";
 
 function GameBoard() {
   const [gameStarted, setGameStarted] = useState(false);
@@ -11,39 +10,46 @@ function GameBoard() {
 
 
  // Hämtar ett slumpmässigt ord när spelet startar eller längden på ordet ändras
- const getWords = async () => {
-  try {
-    const response = await fetch('/api/words', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ length }) // skicka med vald ordlängd
+ const getWord = async () => {
+    const response = await fetch('/api/randomWord', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ length })
     });
 
-    const payload = await response.json();
+    const data = await response.json();
 
-    if (payload && payload.word) {
-      setWord(payload.word);
-    } else {
-      setWord("default");
-    }
-  } catch (error) {
-    setWord("default");
-  }
+      setWord(data.word);
 };
 
 const startGame = async () => {
-  await getWords(); // hämta ord med rätt längd innan spelet startar
+  await getWord(); 
   setGameStarted(true);
+  setGuesses([]);
 };
 
 
-const handleGuess = () => {
+const handleGuess = async () => {
   if (guess.trim().length === length) {
-    const guessFeedback = feedback(guess, word);  
-    setGuesses([...guesses, { guess, feedback: guessFeedback }]);
-    setGuess("");  
+    const response = await fetch('/api/guess', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ guess, word })
+    });
+
+    const data = await response.json();
+
+    setGuesses([...guesses, { guess, feedback: data.feedback }]);
+    setGuess("");
+
+    if (data.correct) {
+      
+      setGameStarted(true); 
+    } else if (guesses.length + 1 >= 8) {
+      alert(`Tyvärr! Ordet var "${word}". Försök igen!`);
+      setGameStarted(false);
+    }
+
   } else {
     alert(`Gissningen måste vara ${length} bokstäver lång!`);
   }
@@ -60,21 +66,6 @@ const resetGame = () => {
   setGuesses([]);
   setWord("");
 };
-
-useEffect(() => {
-  if (
-    guesses.length > 0 &&
-    guesses[guesses.length - 1].guess.toUpperCase() === word.toUpperCase()
-  ) {
-    alert("Grattis! Du gissade rätt!");
-    setGameStarted(false);
-  } else if (guesses.length >= 8) {
-    alert(`Tyvärr! Ordet var "${word}". Försök igen!`);
-    setGameStarted(false);
-  }
-}, [guesses]);
-
- 
 
   return (
     <div className="game-board">
