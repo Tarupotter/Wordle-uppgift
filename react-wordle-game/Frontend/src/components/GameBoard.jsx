@@ -9,7 +9,6 @@ function GameBoard() {
   const [allowRepeats, setAllowRepeats] = useState(true); 
 
 
- // Hämtar ett slumpmässigt ord när spelet startar eller längden på ordet ändras
  const getWord = async () => {
     const response = await fetch('/api/randomWord', {
       method: "POST",
