@@ -39,14 +39,13 @@ body {
  .settings {
   background: linear-gradient(135deg, #837363, #c9baaa);
   border: 1px solid;
+  padding-bottom: 10px;
  }
 
-.settings,
-.game-play {
-  margin-top: 20px;
-  padding: 10px;
-  border-radius: 5px;
-}
+ .settings-title {
+  margin-bottom: 60px;
+  font-size: 30px;
+ }
 
 .settings-item,
 .guess-input,
@@ -61,14 +60,9 @@ body {
   border-radius: 5px;
 }
 
-.settings-select,
-.settings-title {
-  margin-bottom: 10px;
-  margin-top: 20px;
-}
-
 .settings-checkbox {
   accent-color: rgb(0, 0, 0);
+  margin-bottom: 60px;
 }
 
 .guess-input-field {
@@ -83,7 +77,6 @@ body {
 .guess-button,
 .reset-button {
   padding:  12px;
-  margin-top: 30px;
   font-size: 1.5rem;
   color: rgb(255, 255, 255);
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
