@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
-</head>
-<body>
-    <h1>Wordle spel dokumentation</h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <h1>Wordle spel dokumentation och regler</h1>
 
-    <h2>Hur jag går tillväga för att lösa en skoluppgift där vi ska:</h2>
+    <h2>Skoluppgift där vi ska bygga en egen version av ett wordle spel:</h2>
     <ul>
-        <li>Använda React för spelet</li>
-        <li>Server side rendera en highscorelista</li>
+      <li>
+        Skapa ett wordle spel med React där delar av logiken byggs på backend
+      </li>
+      <li>
+        Server side rendera en highscorelista som dynamiskt ändras när
+        användaren spelar och får ett resultat
+      </li>
     </ul>
-    <h1>Tillvägagångssätt</h1>
-    <ul>
-        <li>Först gör jag spelet med React</li>
-        <li>Jag vill ha en komponent för hur spelbrädan ser ut</li>
-        <li>Server side rendera en highscorelista</li>
-    </ul>
-</body>
+
+    <div>
+      <h1>Spelregler</h1>
+      <ol>
+        <li>
+          välj dina inställningar: antal bokstäver och tillåt upprepning av
+          bokstav eller ej
+        </li>
+        <li>Gissa ett ord i textrutan</li>
+        <li>
+          Nu ser du ordet nedanför textrutan med antingen röda, gula eller gröna
+          bokstäver
+        </li>
+        <li>
+          grön = bokstaven finns på rätt plats <br />
+          gul = bokstaven finns med i ordet men är på fel plats <br />
+          röd = bokstaven finns inte med i ordet
+        </li>
+      </ol>
+    </div>
+  </body>
 </html>

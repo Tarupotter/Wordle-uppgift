@@ -18,7 +18,7 @@ function GameBoard() {
 
     const data = await response.json();
 
-      setWord(data.word);
+    setWord(data.word);
 };
 
 const startGame = async () => {
