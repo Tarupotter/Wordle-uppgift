@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import fs from 'fs/promises'; 
 import getFeedback from './feedback.js';
 
@@ -11,7 +12,7 @@ app.use(express.json());
 app.post('/api/randomWord', async (req, res) => {
     const { length } = req.body;
 
-    const data = await fs.readFile('words.json', 'utf8');
+    const data = await fs.readFile('./data/words.json', 'utf8');
     const words = JSON.parse(data).words;
 
     const filteredWords = words.filter((w) => w.length === length);
@@ -30,6 +31,17 @@ app.post('/api/guess', (req, res) => {
 
   res.json({ feedback, correct });
 });
+
+app.get('/highscore', async (req, res) => {
+  const htmlText = await fs.readFile('./highscore.handlebars');
+  res.send(htmlText.toString());
+});
+
+app.get('/api/highscore', async (req, res) => {
+ await mongoose.connect('mongodb://localhost:27017/highscore');
+
+});
+
 
 
 app.get('/about', async (req, res) => {

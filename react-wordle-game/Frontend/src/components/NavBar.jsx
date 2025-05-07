@@ -4,9 +4,9 @@ function NavBar() {
   return (
     <nav className="navbar">
       <ul className="navbar-list">
-        <li className="navbar-item">Home</li>
-        <li className="navbar-item">About</li>
-        <li className="navbar-item">Highscore</li>
+        <li className="navbar-item"><a href="/" className={window.location.pathname === "/" ? "active" : ""}>Home</a></li>
+        <li className="navbar-item"><a href="/about" className={window.location.pathname === "/" ? "active" : ""}>About</a></li>
+        <li className="navbar-item"><a href="/highscore" className={window.location.pathname === "/" ? "active" : ""}>Highscore</a></li>
       </ul>
     </nav>
   );
