@@ -16,7 +16,7 @@ function GameBoard() {
     const response = await fetch("/api/randomWord", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ length }),
+      body: JSON.stringify({ length, allowRepeats }),
     });
 
     const data = await response.json();
