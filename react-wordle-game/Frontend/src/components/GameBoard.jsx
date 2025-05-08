@@ -1,70 +1,85 @@
 import React, { useState, useEffect } from "react";
+import Highscore from "./Highscore";
 
 function GameBoard() {
   const [gameStarted, setGameStarted] = useState(false);
   const [guess, setGuess] = useState("");
   const [guesses, setGuesses] = useState([]);
   const [word, setWord] = useState("");
-  const [length, setLength] = useState(5); 
-  const [allowRepeats, setAllowRepeats] = useState(true); 
+  const [length, setLength] = useState(5);
+  const [allowRepeats, setAllowRepeats] = useState(true);
+  const [startTime, setStartTime] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(null);
 
-
- const getWord = async () => {
-    const response = await fetch('/api/randomWord', {
+  const getWord = async () => {
+    const response = await fetch("/api/randomWord", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ length })
+      body: JSON.stringify({ length }),
     });
 
     const data = await response.json();
 
     setWord(data.word);
-};
+  };
 
-const startGame = async () => {
-  await getWord(); 
-  setGameStarted(true);
-  setGuesses([]);
-};
+  const startGame = async () => {
+    await getWord();
+    setGameStarted(true);
+    setGuesses([]);
+    setStartTime(Date.now());
+  };
 
+  const handleGuess = async () => {
+    if (guess.trim().length === length) {
+      const response = await fetch("/api/guess", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ guess, word }),
+      });
 
-const handleGuess = async () => {
-  if (guess.trim().length === length) {
-    const response = await fetch('/api/guess', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ guess, word })
-    });
+      const data = await response.json();
 
-    const data = await response.json();
+      setGuesses([...guesses, { guess, feedback: data.feedback }]);
+      setGuess("");
 
-    setGuesses([...guesses, { guess, feedback: data.feedback }]);
-    setGuess("");
+      if (data.correct) {
+        const endTime = Date.now();
+        const timeInSeconds = Math.floor((endTime - startTime) / 1000);
 
-    if (data.correct) {
-      
-      setGameStarted(true); 
-    } else if (guesses.length + 1 >= 8) {
-      alert(`Tyvärr! Ordet var "${word}". Försök igen!`);
-      setGameStarted(false);
+        setElapsedTime(timeInSeconds);
+        setGameStarted(false);
+        setShowPopup(true);
+      } else if (guesses.length + 1 >= 8) {
+        alert(`Tyvärr! Ordet var "${word}". Försök igen!`);
+        setGameStarted(false);
+      }
+    } else {
+      alert(`Gissningen måste vara ${length} bokstäver lång!`);
     }
-
-  } else {
-    alert(`Gissningen måste vara ${length} bokstäver lång!`);
-  }
-};
+  };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") handleGuess();
   };
 
- 
-const resetGame = () => {
-  setGameStarted(false);
-  setGuess("");
-  setGuesses([]);
-  setWord("");
-};
+  const handleSaveHighscore = async (highscoreData) => {
+    const response = await fetch("/api/saveHighscore", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(highscoreData),
+    });
+
+    setShowPopup(false);
+  };
+
+  const resetGame = () => {
+    setGameStarted(false);
+    setGuess("");
+    setGuesses([]);
+    setWord("");
+  };
 
   return (
     <div className="game-board">
@@ -116,31 +131,37 @@ const resetGame = () => {
               onChange={(e) => setGuess(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Skriv din gissning här"
-              maxLength={length} 
+              maxLength={length}
             />
           </div>
-  <button className="guess-button" onClick={handleGuess}>
-              Gissa
-            </button>
+          <button className="guess-button" onClick={handleGuess}>
+            Gissa
+          </button>
           <button className="reset-button" onClick={resetGame}>
-   Omstart
-  </button>
+            Omstart
+          </button>
 
-  <ul className="guess-list">
-  {guesses.map((item, index) => (
-    <li key={index} className="guess-item">
-      {item.guess.split("").map((letter, i) => (
-        <span
-          key={i}
-          className={`letter ${item.feedback[i].result}`} 
-        >
-          {letter}
-        </span>
-      ))}
-    </li>
-  ))}
-</ul>
+          <ul className="guess-list">
+            {guesses.map((item, index) => (
+              <li key={index} className="guess-item">
+                {item.guess.split("").map((letter, i) => (
+                  <span key={i} className={`letter ${item.feedback[i].result}`}>
+                    {letter}
+                  </span>
+                ))}
+              </li>
+            ))}
+          </ul>
         </div>
+      )}
+      {showPopup && (
+        <Highscore
+          time={elapsedTime}
+          guesses={guesses}
+          word={word}
+          settings={{ length, allowRepeats }}
+          onSubmit={handleSaveHighscore}
+        />
       )}
     </div>
   );
