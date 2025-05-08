@@ -47,6 +47,10 @@ body {
   font-size: 30px;
  }
 
+.settings-label{
+  font-size: 25px;
+}
+
 .settings-item,
 .guess-input,
 .guess-button {
@@ -87,6 +91,10 @@ body {
   cursor: pointer;
   background: linear-gradient(135deg, #c8b39faf, #f5e9dcc2);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.highscore-button {
+  margin-left: 10px;
 }
 
 .start-button:hover,
@@ -135,8 +143,14 @@ body {
  padding: 0 20px 0 20px;
 }
 
+a{
+  color: #ffffff;
+  text-decoration: none;
+}
+
 .active {
-  color: #b5b4ac; 
+  color: #938d79; 
+  text-decoration: underline;
 }
 
 .highscore-input-field {

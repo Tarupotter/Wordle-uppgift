@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Highscore({ time, guesses, word, settings, onSubmit }) {
+function Highscore({ time, guesses, word, settings, onSubmit, onCancel }) {
   const [name, setName] = useState("");
 
   const handleSubmit = () => {
@@ -17,6 +17,10 @@ function Highscore({ time, guesses, word, settings, onSubmit }) {
     }
   };
 
+  const handleCancel = () => {
+    onCancel();
+  };
+
   return (
     <div className="popup">
       <h2>Grattis! Du klarade det på {time} sekunder!</h2>
@@ -31,6 +35,8 @@ function Highscore({ time, guesses, word, settings, onSubmit }) {
         />
       
       <button className="highscore-button"onClick={handleSubmit}>Spara highscore</button>
+      <button className="highscore-button" onClick={handleCancel}>Spara inte</button>
+      
     </div>
   );
 }

@@ -74,6 +74,10 @@ function GameBoard() {
     setShowPopup(false);
   };
 
+  const handleCancelHighscore = () => {
+    setShowPopup(false);
+  };
+
   const resetGame = () => {
     setGameStarted(false);
     setGuess("");
@@ -161,6 +165,7 @@ function GameBoard() {
           word={word}
           settings={{ length, allowRepeats }}
           onSubmit={handleSaveHighscore}
+          onCancel={handleCancelHighscore}
         />
       )}
     </div>
