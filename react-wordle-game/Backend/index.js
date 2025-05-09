@@ -1,13 +1,21 @@
 import express from "express";
 import mongoose from "mongoose";
+import { engine } from 'express-handlebars'
 import fs from "fs/promises";
 import getFeedback from "./feedback.js";
 import Highscore from "./src/models.js";
 
+
 const app = express();
 const port = 5080;
 
+app.engine("handlebars", engine());
+  app.set("view engine", "handlebars");
+  app.set("views", "../Backend/views");
+
 app.use(express.json());
+app.use(express.static('public'));
+
 
 app.post("/api/randomWord", async (req, res) => {
   const { length, allowRepeats } = req.body;
@@ -40,8 +48,20 @@ app.post("/api/guess", (req, res) => {
 });
 
 app.get("/highscore", async (req, res) => {
-  const htmlText = await fs.readFile("./highscore.handlebars");
-  res.send(htmlText.toString());
+  try {
+    const highscores = await Highscore.find()
+    .sort({ time: 1 })
+    .limit(10)
+    .lean();
+    console.log("Hämtade highscores:", highscores);
+    res.render("highscore", {
+      title: "Topplista",
+      highscores: highscores,  // Skicka highscores till vy
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Serverfel");
+  }
 });
 
 mongoose

@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 const highscoreSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  time: { type: Number, required: true },
-  guesses: { type: Array, required: true },
+  name: String,
+  time: Number,
+  guesses:Array,
   settings: {
-    length: { type: Number, required: true },
-    allowRepeats: { type: Boolean, required: true },
+    length: Number,
+    allowRepeats: Boolean,
   },
 });
 

@@ -1,0 +1,15 @@
+<h1>🏆 Topplista</h1>
+
+<div class="highscore-card big-card">
+  <h1 class="game-title">Highscores</h1>
+  <ol class="highscore-list">
+    {{#each highscores}}
+      <li class="highscore-row">
+        <span class="name">{{this.name}}</span>
+        <span class="time">{{this.time}} sek</span>
+        <span class="settings">Längd: {{this.settings.length}}, Rep: {{#if this.settings.allowRepeats}}Ja{{else}}Nej{{/if}}</span>
+        <span class="guesses">{{this.guesses.length}} gissningar</span>
+      </li>
+    {{/each}}
+  </ol>
+</div>

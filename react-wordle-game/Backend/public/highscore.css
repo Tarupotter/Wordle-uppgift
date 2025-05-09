@@ -1,0 +1,51 @@
+.big-card {
+  background: linear-gradient(135deg, #c8b39f, #f5e9dc);
+  border: 1px solid rgb(182, 172, 172);
+  border-radius: 12px;
+  padding: 30px 40px;
+  box-shadow: 0 4px 12px rgba(109, 109, 109, 0.2), 0 8px 24px #74665a55;
+  color: #3a2f2f;
+  max-width: 900px;
+  margin: 40px auto;
+  font-family: "Fascinate", system-ui;
+}
+
+.game-title{
+  text-align: center;
+}
+
+.highscore-list {
+  list-style: decimal inside;
+  padding: 0;
+  margin: 0;
+}
+
+.highscore-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #bbaea0;
+  font-size: 1.1rem;
+}
+
+.highscore-row:last-child {
+  border-bottom: none;
+}
+
+.highscore-row span {
+  min-width: 100px;
+  margin-left: 10px;
+}
+
+.name {
+  flex: 1;
+  font-weight: bold;
+}
+
+.time,
+.settings,
+.guesses {
+  flex: 1;
+  text-align: right;
+}
