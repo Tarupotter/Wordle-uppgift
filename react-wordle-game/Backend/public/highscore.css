@@ -97,3 +97,27 @@ body {
   transform: scale(0.98);
   background-color: #c2b6a3;
 }
+
+.button-container {
+  text-align: center;
+}
+
+.back-button{
+  display: inline-block;
+  margin: 0 auto;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 1.5rem; 
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #c8b39faf, #f5e9dcc2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.back-button:hover {
+  background: linear-gradient(135deg, #99897a, #f5e9dc39);
+}
