@@ -2,17 +2,24 @@ import express from "express";
 import mongoose from "mongoose";
 import { engine } from "express-handlebars";
 import fs from "fs/promises";
+import { fileURLToPath } from "url";
+import path from "path";
 import getFeedback from "./feedback.js";
 import Highscore from "./src/models.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 5080;
 
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
-app.set("views", "../Backend/views");
+app.set("views", path.join(__dirname, "views"));
+
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../Frontend/dist")));
 
 app.post("/api/randomWord", async (req, res) => {
   const { length, allowRepeats } = req.body;
@@ -52,11 +59,6 @@ app.get("/highscore", async (req, res) => {
   });
 });
 
-mongoose
-  .connect("mongodb://localhost:27017/wordle")
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((error) => console.log(error));
-
 app.post("/api/saveHighscore", async (req, res) => {
   const { name, time, guesses, settings } = req.body;
 
@@ -76,6 +78,10 @@ app.get("/about", async (req, res) => {
   res.send(htmlText.toString());
 });
 
-app.listen(port, () => {
-  console.log(`Servern körs på http://localhost:${port}`);
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../Frontend/dist/index.html"));
+});
+
+mongoose.connect("mongodb://localhost:27017/wordle").then(() => {
+  app.listen(port);
 });

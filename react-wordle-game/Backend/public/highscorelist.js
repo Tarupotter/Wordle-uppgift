@@ -5,7 +5,7 @@
 
     guessList.classList.toggle('hidden');
 
-    // Ändra pil ned/upp
+   
     if (isHidden) {
       el.textContent = el.textContent.replace('▼', '▲');
     } else {
