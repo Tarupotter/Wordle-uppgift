@@ -4,7 +4,7 @@ import { engine } from "express-handlebars";
 import fs from "fs/promises";
 import { fileURLToPath } from "url";
 import path from "path";
-import getFeedback from "./feedback.js";
+import getFeedback from "./src/feedback.js"
 import Highscore from "./src/models.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -73,9 +73,8 @@ app.post("/api/saveHighscore", async (req, res) => {
   res.json({ message: "Highscore saved!" });
 });
 
-app.get("/about", async (req, res) => {
-  const htmlText = await fs.readFile("./index.html");
-  res.send(htmlText.toString());
+app.get("/about", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "about.html"));
 });
 
 app.get("/", (req, res) => {

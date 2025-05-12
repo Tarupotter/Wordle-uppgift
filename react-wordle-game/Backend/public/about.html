@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/about.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Om Projektet: Wordle Spel med Highscore</h1>
+    </header>
+
+    <main>
+      <section>
+        <h2>Vad är detta projekt?</h2>
+        <p>
+          Detta är ett Wordle-inspirerat spel där användaren ska gissa ett
+          slumpmässigt valt ord baserat på feedback från sina gissningar. När
+          användaren har gissat ordet korrekt, får de möjlighet att spara sitt
+          resultat i en highscore-lista.
+        </p>
+      </section>
+
+      <section>
+        <h2>Spelets Regler</h2>
+        <p>
+          Spelet går ut på att gissa ett ord genom att skriva in gissningar i
+          ett fritextfält. Varje gång användaren gissar får de feedback på sin
+          gissning:
+        </p>
+        <ul>
+          <li>
+            <strong>Grön:</strong> Bokstaven är korrekt och på rätt plats.
+          </li>
+          <li>
+            <strong>Gul:</strong> Bokstaven finns i ordet men är på fel plats.
+          </li>
+          <li><strong>Röd:</strong> Bokstaven finns inte i ordet.</li>
+        </ul>
+        <p>
+          När användaren gissar rätt ord, avslutas spelet och de får möjlighet
+          att spara sin omgång till highscore listan.
+        </p>
+        <p>
+          Användaren får också möjlighet att se sin rankning på en
+          highscore-lista, via en länk i menyn.
+        </p>
+      </section>
+
+      <section>
+        <h2>Vad jag har jobbat med</h2>
+        <p>
+          Jag har byggt en fullstack-applikation som inkluderar både frontend
+          och backend.
+        </p>
+        <br/>
+        <h3>Frontend:</h3>
+        <ul>
+          <li>
+            <strong>React:</strong> Använt för att bygga användargränssnittet
+            där användaren kan spela spelet.
+          </li>
+          <li>
+            <strong>Komponenter:</strong> Med/i React valde jag att bygga spelet
+            i en komponent, highscore-inskrivning i en och menyn i en.
+          </li>
+        </ul>
+
+        <h3>Backend:</h3>
+        <ul>
+          <li>
+            <strong>Feedback-algoritm:</strong> Implementerat logiken för att ge
+            feedback på gissningarna (grön, gul, röd).
+          </li>
+          <li>
+            <strong>Node.js med Express:</strong> Servern är byggd med Node.js
+            och Express, och servar både spelet och highscore-listan.
+          </li>
+          <li>
+            <strong>API:</strong> Backend genererar slumpmässiga ord och ger
+            feedback på användarens gissningar via ett API.
+          </li>
+          <li>
+            <strong>Databas:</strong> Högsta poäng sparas i en MongoDB-databas.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Tekniska Verktyg och Bibliotek</h2>
+        <ul>
+          <li>
+            <strong>Express:</strong> För att skapa API:et och hantera servern.
+          </li>
+          <li><strong>React:</strong> För att bygga användargränssnittet.</li>
+          <li>
+            <strong>MongoDB:</strong> För att lagra och hantera highscore-data.
+          </li>
+          <li>
+            <strong>Node.js:</strong> För serverlogik och hantering av requests.
+          </li>
+          <li>
+            <strong>HTML/CSS:</strong> För att skapa och styla den statiska
+            sidan och spelets gränssnitt.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <section>
+          <h2>Vad jag Tyckte om Projektet</h2>
+          <p>
+            Att börja på detta projekt var inte helt enkelt. I början kände jag mig ganska osäker på hur jag skulle gå tillväga, och det tog ett tag innan jag kom igång på riktigt. Jag behövde göra om en del saker när jag hade kommit en bit, och många gånger kände jag mig frustrerad och osäker på om jag var på rätt väg. Jag spenderade mycket tid på att söka information, titta på videor och gå igenom lektionsmaterial för att förstå vad jag egentligen behövde göra för att få allt att fungera.
+          </p>
+          <br />
+          <p>
+            En stor del som jag fastnade på länge var React. Det tog tid att förstå hur komponenter skulle byggas upp och kommunicera med varandra, särskilt i kombination med API-anropen till backend. Jag fick börja om flera gånger innan jag fick det att fungera på ett sätt som kändes rätt. 
+          </p>
+          <br />
+          <p>
+            Trots de inledande svårigheterna tyckte jag ändå att projektet var intressant och som en väldigt kul utmaning. Jag kämpade med att få ihop frontend och backend, det var en utmaning som krävde mycket tålamod.
+          </p>
+          <br />
+          <p>
+            Även om resultatet inte är perfekt, är jag nöjd med att jag faktiskt lyckades få projektet färdigt. Det har varit ett lärorikt och utmanande projekt, och även om det finns saker jag skulle kunna förbättra är jag stolt över att ha slutfört det. Jag har definitivt lärt mig mycket längs vägen, och det känns bra att ha tagit sig igenom hela processen - även om det inte alltid varit lätt.
+          </p>
+        </section>
+        
+
+      <section>
+        <h2>Färdiga Funktioner</h2>
+        <ul>
+          <li>Generering av slumpmässiga ord med olika längder.</li>
+          <li>Feedback på varje gissning (grön, gul, röd).</li>
+          <li>Highscore-lista där resultat sparas och visas.</li>
+          <li>En statisk "Om"-sida som förklarar spelet och projektet.</li>
+        </ul>
+      </section>
+      <a href="/">Tillbaka</a>
+    </main>
+
+    <footer>
+      <p>Skapat av [Taru Keskinen].</p>
+    </footer>
+  </body>
+</html>
